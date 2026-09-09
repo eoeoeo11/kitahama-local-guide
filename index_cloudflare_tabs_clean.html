@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>OSAKA GOURMET GUIDE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f5f1;color:#222;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif}
+.wrap{max-width:720px;margin:auto;padding:28px 18px 44px}
+header{background:#222;color:#fff;border-radius:20px;padding:30px 24px;margin-bottom:18px}
+.kicker{font-size:12px;letter-spacing:.18em;opacity:.72;margin-bottom:8px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:.02em}
+.sub{font-size:14px;line-height:1.7;opacity:.88}
+.note{background:#fff;border:1px solid #e6e0d8;border-radius:16px;padding:15px 17px;margin:0 0 16px;font-size:13px;line-height:1.7}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}
+.tab{appearance:none;border:1px solid #e2ddd5;background:#fff;color:#555;border-radius:14px;padding:13px 10px;font-size:15px;font-weight:700;cursor:pointer}
+.tab.active{background:#222;color:#fff;border-color:#222}
+.panel{display:none}
+.panel.active{display:block}
+.panel-title{font-size:17px;font-weight:700;margin:0 0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #e7e2db;border-radius:15px;padding:16px 14px;text-decoration:none;color:#222;min-height:64px;box-shadow:0 2px 8px rgba(0,0,0,.035)}
+.icon{font-size:23px;width:28px;text-align:center}
+.card span:nth-child(2){font-size:15px;font-weight:600;flex:1}
+.arrow{font-size:24px;color:#aaa}
+footer{text-align:center;font-size:11px;color:#888;margin-top:24px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}h1{font-size:27px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<div class="kicker">DAIWA ROYNET HOTEL OSAKA-KITAHAMA</div>
+<h1>OSAKA GOURMET GUIDE</h1>
+<div class="sub">ホテル周辺・大坂北浜でおすすめのお店をカテゴリー別にご紹介します。</div>
+</header>
+<div class="note">気になるカテゴリーをタップすると、Google Mapsのおすすめリストをご覧いただけます。</div>
+<div class="tabs" role="tablist" aria-label="Guide categories">
+<button class="tab active" type="button" role="tab" aria-selected="true" onclick="showPanel('restaurant',this)">🍽️ 飲食店</button>
+<button class="tab" type="button" role="tab" aria-selected="false" onclick="showPanel('facility',this)">📍 周辺施設</button>
+</div>
+<section id="restaurant-panel" class="panel active" role="tabpanel">
+<div class="panel-title">おすすめの飲食店</div>
+<div class="grid">
+      <a class="card" href="https://maps.app.goo.gl/W3Av2TtnjYTc1GSU6" target="_blank" rel="noopener"><span class="icon">🍱</span><span>定食屋</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/DTsgVuGSJoifsEJ68" target="_blank" rel="noopener"><span class="icon">🥘</span><span>韓国料理</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/Tz4GXZzwqVHcxUuXA" target="_blank" rel="noopener"><span class="icon">🍸</span><span>バー</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/zt3nwMcp8eFNwV3g7" target="_blank" rel="noopener"><span class="icon">🍔</span><span>ハンバーガー</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/wQeYKkN1MhtibujJ6" target="_blank" rel="noopener"><span class="icon">🥟</span><span>中華料理</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/G3cr2MJftvUmn2Jb9" target="_blank" rel="noopener"><span class="icon">🍜</span><span>アジアン</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/bxbFzMFhqbNoAP6J9" target="_blank" rel="noopener"><span class="icon">🐙</span><span>大阪名物</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/M9XuM4cFipyTcA7fA" target="_blank" rel="noopener"><span class="icon">🍽️</span><span>レストラン</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/NJDM7USHzLSyNK6SA" target="_blank" rel="noopener"><span class="icon">🍣</span><span>寿司／海鮮</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/KWVfzhdAGHtMKUWw9" target="_blank" rel="noopener"><span class="icon">🥩</span><span>洋食</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/afervinvq77j95FZ7" target="_blank" rel="noopener"><span class="icon">🍰</span><span>デザート</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/X4jF1Zm9vEn7T3eq5" target="_blank" rel="noopener"><span class="icon">🥗</span><span>サラダ</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/th4oNN1gm11duR1cA" target="_blank" rel="noopener"><span class="icon">🍱</span><span>お弁当屋</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/TTxgxcQKTokdh364A" target="_blank" rel="noopener"><span class="icon">☕</span><span>カフェ</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/uNcC5AaNqF7GozYP9" target="_blank" rel="noopener"><span class="icon">🍶</span><span>居酒屋</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/NTRs26KKr5uFpGze8" target="_blank" rel="noopener"><span class="icon">🍣</span><span>日本料理</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/YHRgh4NxnvNJqqT78" target="_blank" rel="noopener"><span class="icon">🥩</span><span>焼肉</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/Dc7XLE8BaDrMfnmXA" target="_blank" rel="noopener"><span class="icon">🍜</span><span>ラーメン</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/EtB2qRjpyN3bcqFi8" target="_blank" rel="noopener"><span class="icon">🍜</span><span>うどん／そば</span><span class="arrow">↗</span></a>
+</div>
+</section>
+<section id="facility-panel" class="panel" role="tabpanel">
+<div class="panel-title">周辺の便利な施設</div>
+<div class="grid">
+      <a class="card" href="https://maps.app.goo.gl/JZNArYLiTp4wArP77" target="_blank" rel="noopener"><span class="icon">💱</span><span>外貨両替</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/uqBA2is8gMkfYwQr8" target="_blank" rel="noopener"><span class="icon">🏧</span><span>ATM</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/dsEadLadkhvafqro7" target="_blank" rel="noopener"><span class="icon">💊</span><span>ドラックストア</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/MnDvbhUSRevDQpNj6" target="_blank" rel="noopener"><span class="icon">📮</span><span>郵便局</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/WcgfBE4uVdCagNKm7" target="_blank" rel="noopener"><span class="icon">🏥</span><span>病院</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/DhuBZUttQtjLjkzL6" target="_blank" rel="noopener"><span class="icon">🏦</span><span>銀行</span><span class="arrow">↗</span></a>
+      <a class="card" href="https://maps.app.goo.gl/uBCipweb4b6AiwodA" target="_blank" rel="noopener"><span class="icon">🏪</span><span>コンビニエンスストア</span><span class="arrow">↗</span></a>
+</div>
+</section>
+<footer>Enjoy your stay in Osaka.</footer>
+</div>
+<script>
+function showPanel(name, button) {
+  document.querySelectorAll('.panel').forEach(function(panel) {
+    panel.classList.toggle('active', panel.id === name + '-panel');
+  });
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.classList.remove('active');
+    tab.setAttribute('aria-selected','false');
+  });
+  button.classList.add('active');
+  button.setAttribute('aria-selected','true');
+}
+</script>
+</body>
+</html>
