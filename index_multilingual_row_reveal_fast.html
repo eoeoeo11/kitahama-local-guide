@@ -1,0 +1,260 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title data-i18n="title">KITAHAMA GOURMET GUIDE</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f7f5f1;color:#222;font-family:-apple-system,BlinkMacSystemFont,"Noto Sans JP","Yu Gothic",sans-serif}
+.wrap{max-width:720px;margin:auto;padding:28px 18px 44px}
+header{background:#222;color:#fff;border-radius:20px;padding:30px 24px;margin-bottom:18px}
+.kicker{font-size:12px;letter-spacing:.18em;opacity:.72;margin-bottom:8px}
+h1{font-size:30px;margin:0 0 8px;letter-spacing:.02em}
+.sub{font-size:14px;line-height:1.7;opacity:.88}
+.note{background:#fff;border:1px solid #e6e0d8;border-radius:16px;padding:15px 17px;margin:0 0 16px;font-size:13px;line-height:1.7}
+.tabs{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 14px}
+.tab{appearance:none;border:1px solid #e2ddd5;background:#fff;color:#555;border-radius:14px;padding:13px 10px;font-size:15px;font-weight:700;cursor:pointer}
+.tab.active{background:#222;color:#fff;border-color:#222}
+.panel{display:none}
+.panel.active{display:block}
+.panel-title{font-size:17px;font-weight:700;margin:0 0 10px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.card{display:flex;align-items:center;gap:11px;background:#fff;border:1px solid #e7e2db;border-radius:15px;padding:16px 14px;text-decoration:none;color:#222;min-height:64px;box-shadow:0 2px 8px rgba(0,0,0,.035)}
+.icon{font-size:23px;width:28px;text-align:center}
+.card span:nth-child(2){font-size:15px;font-weight:600;flex:1}
+.arrow{font-size:24px;color:#aaa}
+footer{text-align:center;font-size:11px;color:#888;margin-top:24px}
+@media(max-width:520px){.grid{grid-template-columns:1fr}h1{font-size:27px}}
+
+/* Entrance animations */
+@keyframes headerSlideIn {
+  from { transform: translateX(-110%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+@keyframes headerTextFadeIn {
+  from { opacity: 0; transform: translateX(-14px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes revealFromHeader {
+  from { opacity: 0; transform: translateY(-24px); clip-path: inset(0 0 100% 0); }
+  to { opacity: 1; transform: translateY(0); clip-path: inset(0 0 0 0); }
+}
+header { animation: headerSlideIn .9s cubic-bezier(.22,.61,.36,1) both; overflow: hidden; }
+header .kicker, header h1, header .sub { opacity: 0; animation: headerTextFadeIn .65s ease-out both; }
+header .kicker { animation-delay: .42s; }
+header h1 { animation-delay: .56s; }
+header .sub { animation-delay: .70s; }
+.note, .tabs, .panel.active { opacity: 0; animation: revealFromHeader .9s cubic-bezier(.22,.61,.36,1) 1.02s both; }
+
+.lang-switcher{display:flex;justify-content:flex-end;gap:6px;margin:0 0 10px;flex-wrap:wrap}
+.lang-btn{border:1px solid #ded8cf;background:#fff;color:#555;border-radius:999px;padding:7px 10px;font-size:12px;font-weight:700;cursor:pointer}
+.lang-btn.active{background:#222;color:#fff;border-color:#222}
+
+/* ===== Row-by-row reveal animation (faster) ===== */
+@keyframes seqReveal {
+  from {
+    opacity: 0;
+    transform: translateY(-14px);
+    clip-path: inset(0 0 100% 0);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+.note,
+.tabs,
+.panel.active {
+  animation: none;
+}
+
+.note {
+  opacity: 0;
+  animation: seqReveal .34s cubic-bezier(.22,.61,.36,1) .82s both;
+}
+
+.tabs {
+  opacity: 0;
+  animation: seqReveal .34s cubic-bezier(.22,.61,.36,1) .92s both;
+}
+
+.panel.active {
+  opacity: 1;
+  transform: none;
+  clip-path: none;
+}
+
+.panel.active .panel-title {
+  opacity: 0;
+  animation: seqReveal .32s cubic-bezier(.22,.61,.36,1) 1.02s both;
+}
+
+.panel.active .card {
+  opacity: 0;
+  animation: seqReveal .32s cubic-bezier(.22,.61,.36,1) both;
+}
+
+/* Two-column desktop layout: both cards in each row appear together. */
+.panel.active .card:nth-child(1),
+.panel.active .card:nth-child(2) { animation-delay: 1.10s; }
+
+.panel.active .card:nth-child(3),
+.panel.active .card:nth-child(4) { animation-delay: 1.18s; }
+
+.panel.active .card:nth-child(5),
+.panel.active .card:nth-child(6) { animation-delay: 1.26s; }
+
+.panel.active .card:nth-child(7),
+.panel.active .card:nth-child(8) { animation-delay: 1.34s; }
+
+.panel.active .card:nth-child(9),
+.panel.active .card:nth-child(10) { animation-delay: 1.42s; }
+
+.panel.active .card:nth-child(11),
+.panel.active .card:nth-child(12) { animation-delay: 1.50s; }
+
+.panel.active .card:nth-child(13),
+.panel.active .card:nth-child(14) { animation-delay: 1.58s; }
+
+.panel.active .card:nth-child(15),
+.panel.active .card:nth-child(16) { animation-delay: 1.66s; }
+
+.panel.active .card:nth-child(17),
+.panel.active .card:nth-child(18) { animation-delay: 1.74s; }
+
+.panel.active .card:nth-child(19) { animation-delay: 1.82s; }
+
+footer {
+  opacity: 0;
+  animation: seqReveal .34s ease-out 1.92s both;
+}
+
+/* On phones the grid is one column, so each visible row is one card. */
+@media(max-width:520px) {
+  .panel.active .card:nth-child(1)  { animation-delay: 1.08s; }
+  .panel.active .card:nth-child(2)  { animation-delay: 1.14s; }
+  .panel.active .card:nth-child(3)  { animation-delay: 1.20s; }
+  .panel.active .card:nth-child(4)  { animation-delay: 1.26s; }
+  .panel.active .card:nth-child(5)  { animation-delay: 1.32s; }
+  .panel.active .card:nth-child(6)  { animation-delay: 1.38s; }
+  .panel.active .card:nth-child(7)  { animation-delay: 1.44s; }
+  .panel.active .card:nth-child(8)  { animation-delay: 1.50s; }
+  .panel.active .card:nth-child(9)  { animation-delay: 1.56s; }
+  .panel.active .card:nth-child(10) { animation-delay: 1.62s; }
+  .panel.active .card:nth-child(11) { animation-delay: 1.68s; }
+  .panel.active .card:nth-child(12) { animation-delay: 1.74s; }
+  .panel.active .card:nth-child(13) { animation-delay: 1.80s; }
+  .panel.active .card:nth-child(14) { animation-delay: 1.86s; }
+  .panel.active .card:nth-child(15) { animation-delay: 1.92s; }
+  .panel.active .card:nth-child(16) { animation-delay: 1.98s; }
+  .panel.active .card:nth-child(17) { animation-delay: 2.04s; }
+  .panel.active .card:nth-child(18) { animation-delay: 2.10s; }
+  .panel.active .card:nth-child(19) { animation-delay: 2.16s; }
+  footer { animation-delay: 2.26s; }
+}
+</style>
+</head>
+<body>
+<div class="wrap"><div class="lang-switcher" aria-label="Language"><button class="lang-btn" data-lang="ja">日本語</button><button class="lang-btn" data-lang="en">EN</button><button class="lang-btn" data-lang="ko">한국어</button><button class="lang-btn" data-lang="zh-CN">简体中文</button><button class="lang-btn" data-lang="zh-TW">繁體中文</button></div>
+<header>
+<div class="kicker">DAIWA ROYNET HOTEL OSAKA-KITAHAMA</div>
+<h1>KITAHAMA GOURMET GUIDE</h1>
+<div class="sub" data-i18n="sub">ホテル周辺・大坂北浜でおすすめのお店をカテゴリー別にご紹介します。</div>
+</header>
+<div class="note" data-i18n="note">気になるカテゴリーをタップすると、Google Mapsのおすすめリストをご覧いただけます。</div>
+<div class="tabs" role="tablist" aria-label="Guide categories">
+<button class="tab active" type="button" role="tab" aria-selected="true" onclick="showPanel('restaurant',this)"><span data-i18n="tabRestaurant">飲食店</span></button>
+<button class="tab" type="button" role="tab" aria-selected="false" onclick="showPanel('facility',this)"><span data-i18n="tabFacility">周辺施設</span></button>
+</div>
+<section id="restaurant-panel" class="panel active" role="tabpanel">
+<div class="panel-title" data-i18n="restaurantTitle">おすすめの飲食店</div>
+<div class="grid">
+      <a class="card" href="https://maps.app.goo.gl/uNcC5AaNqF7GozYP9" target="_blank" rel="noopener"><span class="icon">🍶</span><span data-i18n="izakaya">居酒屋</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/W3Av2TtnjYTc1GSU6" target="_blank" rel="noopener"><span class="icon">🍚</span><span data-i18n="setMeal">定食屋</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/Dc7XLE8BaDrMfnmXA" target="_blank" rel="noopener"><span class="icon">🍜</span><span data-i18n="ramen">ラーメン</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/EtB2qRjpyN3bcqFi8" target="_blank" rel="noopener"><span class="icon">🍥</span><span data-i18n="udonSoba">うどん／そば</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/YHRgh4NxnvNJqqT78" target="_blank" rel="noopener"><span class="icon">🥩</span><span data-i18n="yakiniku">焼肉</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/bxbFzMFhqbNoAP6J9" target="_blank" rel="noopener"><span class="icon">🐙</span><span data-i18n="osaka">大阪名物</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/TTxgxcQKTokdh364A" target="_blank" rel="noopener"><span class="icon">☕</span><span data-i18n="cafe">カフェ</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/afervinvq77j95FZ7" target="_blank" rel="noopener"><span class="icon">🍰</span><span data-i18n="dessert">デザート</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/G3cr2MJftvUmn2Jb9" target="_blank" rel="noopener"><span class="icon">🥢</span><span data-i18n="asian">アジアン／カレー</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/X4jF1Zm9vEn7T3eq5" target="_blank" rel="noopener"><span class="icon">🥗</span><span data-i18n="salad">サラダ</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/NTRs26KKr5uFpGze8" target="_blank" rel="noopener"><span class="icon">🇯🇵</span><span data-i18n="japanese">日本料理</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/NJDM7USHzLSyNK6SA" target="_blank" rel="noopener"><span class="icon">🐟</span><span data-i18n="sushi">寿司／海鮮</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/wQeYKkN1MhtibujJ6" target="_blank" rel="noopener"><span class="icon">🇨🇳</span><span data-i18n="chinese">中華料理</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/DTsgVuGSJoifsEJ68" target="_blank" rel="noopener"><span class="icon">🇰🇷</span><span data-i18n="koreanFood">韓国料理</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/KWVfzhdAGHtMKUWw9" target="_blank" rel="noopener"><span class="icon">🍝</span><span data-i18n="western">洋食</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/zt3nwMcp8eFNwV3g7" target="_blank" rel="noopener"><span class="icon">🍔</span><span data-i18n="burger">ハンバーガー</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/Tz4GXZzwqVHcxUuXA" target="_blank" rel="noopener"><span class="icon">🍸</span><span data-i18n="bar">バー</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/M9XuM4cFipyTcA7fA" target="_blank" rel="noopener"><span class="icon">🍽️</span><span data-i18n="restaurant">レストラン</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/th4oNN1gm11duR1cA" target="_blank" rel="noopener"><span class="icon">🍱</span><span data-i18n="bento">お弁当屋</span><span class="arrow">›</span></a>
+</div>
+</section>
+<section id="facility-panel" class="panel" role="tabpanel">
+<div class="panel-title" data-i18n="facilityTitle">周辺の便利な施設</div>
+<div class="grid">
+      <a class="card" href="https://maps.app.goo.gl/uBCipweb4b6AiwodA" target="_blank" rel="noopener"><span class="icon">🏪</span><span data-i18n="convenience">コンビニエンスストア</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/WcgfBE4uVdCagNKm7" target="_blank" rel="noopener"><span class="icon">🏥</span><span data-i18n="hospital">病院</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/dsEadLadkhvafqro7" target="_blank" rel="noopener"><span class="icon">💊</span><span data-i18n="drugstore">ドラックストア</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/MnDvbhUSRevDQpNj6" target="_blank" rel="noopener"><span class="icon">📮</span><span data-i18n="post">郵便局</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/DhuBZUttQtjLjkzL6" target="_blank" rel="noopener"><span class="icon">🏦</span><span data-i18n="bank">銀行</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/uqBA2is8gMkfYwQr8" target="_blank" rel="noopener"><span class="icon">🏧</span><span data-i18n="atm">ATM</span><span class="arrow">›</span></a>
+      <a class="card" href="https://maps.app.goo.gl/JZNArYLiTp4wArP77" target="_blank" rel="noopener"><span class="icon">💱</span><span data-i18n="exchange">外貨両替</span><span class="arrow">›</span></a>
+</div>
+</section>
+<footer data-i18n="footer">Enjoy your stay in Osaka.</footer>
+</div>
+<script>
+const translations={"ja": {"title": "KITAHAMA GOURMET GUIDE", "sub": "ホテル周辺・大阪北浜でおすすめのお店をカテゴリー別にご紹介します。", "note": "気になるカテゴリーをタップすると、Google Mapsのおすすめリストをご覧いただけます。", "tabRestaurant": "飲食店", "tabFacility": "周辺施設", "restaurantTitle": "おすすめの飲食店", "facilityTitle": "周辺の便利な施設", "izakaya": "居酒屋", "setMeal": "定食屋", "ramen": "ラーメン", "udonSoba": "うどん／そば", "yakiniku": "焼肉", "osaka": "大阪名物", "cafe": "カフェ", "dessert": "デザート", "asian": "アジアン／カレー", "salad": "サラダ", "japanese": "日本料理", "sushi": "寿司／海鮮", "chinese": "中華料理", "koreanFood": "韓国料理", "western": "洋食", "burger": "ハンバーガー", "bar": "バー", "restaurant": "レストラン", "bento": "お弁当屋", "convenience": "コンビニエンスストア", "hospital": "病院", "drugstore": "ドラッグストア", "post": "郵便局", "bank": "銀行", "atm": "ATM", "exchange": "外貨両替", "footer": "Enjoy your stay in Osaka."}, "en": {"title": "KITAHAMA GOURMET GUIDE", "sub": "Discover recommended restaurants around the hotel and Osaka Kitahama by category.", "note": "Tap a category to open our recommended list in Google Maps.", "tabRestaurant": "Dining", "tabFacility": "Nearby Facilities", "restaurantTitle": "Recommended Restaurants", "facilityTitle": "Useful Nearby Facilities", "izakaya": "Izakaya", "setMeal": "Set Meals", "ramen": "Ramen", "udonSoba": "Udon / Soba", "yakiniku": "Yakiniku", "osaka": "Osaka Specialties", "cafe": "Cafés", "dessert": "Desserts", "asian": "Asian / Curry", "salad": "Salads", "japanese": "Japanese Cuisine", "sushi": "Sushi / Seafood", "chinese": "Chinese Cuisine", "koreanFood": "Korean Cuisine", "western": "Western Cuisine", "burger": "Hamburgers", "bar": "Bars", "restaurant": "Restaurants", "bento": "Bento", "convenience": "Convenience Stores", "hospital": "Hospitals", "drugstore": "Drugstores", "post": "Post Offices", "bank": "Banks", "atm": "ATMs", "exchange": "Currency Exchange", "footer": "Enjoy your stay in Osaka."}, "ko": {"title": "기타하마 맛집 가이드", "sub": "호텔 주변과 오사카 기타하마의 추천 음식점을 카테고리별로 소개합니다.", "note": "관심 있는 카테고리를 누르면 Google Maps 추천 목록을 확인할 수 있습니다.", "tabRestaurant": "음식점", "tabFacility": "주변 시설", "restaurantTitle": "추천 음식점", "facilityTitle": "주변 편의시설", "izakaya": "이자카야", "setMeal": "정식", "ramen": "라멘", "udonSoba": "우동 / 소바", "yakiniku": "야키니쿠", "osaka": "오사카 명물", "cafe": "카페", "dessert": "디저트", "asian": "아시안 / 카레", "salad": "샐러드", "japanese": "일본 요리", "sushi": "스시 / 해산물", "chinese": "중화요리", "koreanFood": "한국 요리", "western": "양식", "burger": "햄버거", "bar": "바", "restaurant": "레스토랑", "bento": "도시락", "convenience": "편의점", "hospital": "병원", "drugstore": "드럭스토어", "post": "우체국", "bank": "은행", "atm": "ATM", "exchange": "외화 환전", "footer": "오사카에서 즐거운 시간 보내세요."}, "zh-CN": {"title": "北滨美食指南", "sub": "按类别为您介绍酒店周边及大阪北滨的推荐餐厅。", "note": "点击感兴趣的类别，即可在 Google Maps 查看推荐列表。", "tabRestaurant": "餐饮", "tabFacility": "周边设施", "restaurantTitle": "推荐餐厅", "facilityTitle": "周边便利设施", "izakaya": "居酒屋", "setMeal": "定食", "ramen": "拉面", "udonSoba": "乌冬面 / 荞麦面", "yakiniku": "日式烤肉", "osaka": "大阪特色美食", "cafe": "咖啡馆", "dessert": "甜点", "asian": "亚洲料理 / 咖喱", "salad": "沙拉", "japanese": "日本料理", "sushi": "寿司 / 海鲜", "chinese": "中华料理", "koreanFood": "韩国料理", "western": "西餐", "burger": "汉堡", "bar": "酒吧", "restaurant": "餐厅", "bento": "便当", "convenience": "便利店", "hospital": "医院", "drugstore": "药妆店", "post": "邮局", "bank": "银行", "atm": "ATM", "exchange": "外币兑换", "footer": "祝您在大阪度过愉快的时光。"}, "zh-TW": {"title": "北濱美食指南", "sub": "依類別為您介紹飯店周邊及大阪北濱的推薦餐廳。", "note": "點選感興趣的類別，即可在 Google Maps 查看推薦清單。", "tabRestaurant": "餐飲", "tabFacility": "周邊設施", "restaurantTitle": "推薦餐廳", "facilityTitle": "周邊便利設施", "izakaya": "居酒屋", "setMeal": "定食", "ramen": "拉麵", "udonSoba": "烏龍麵 / 蕎麥麵", "yakiniku": "日式燒肉", "osaka": "大阪特色美食", "cafe": "咖啡館", "dessert": "甜點", "asian": "亞洲料理 / 咖哩", "salad": "沙拉", "japanese": "日本料理", "sushi": "壽司 / 海鮮", "chinese": "中華料理", "koreanFood": "韓國料理", "western": "西餐", "burger": "漢堡", "bar": "酒吧", "restaurant": "餐廳", "bento": "便當", "convenience": "便利商店", "hospital": "醫院", "drugstore": "藥妝店", "post": "郵局", "bank": "銀行", "atm": "ATM", "exchange": "外幣兌換", "footer": "祝您在大阪度過愉快的時光。"}};
+function detectLanguage(){const ls=navigator.languages?.length?navigator.languages:[navigator.language||"en"];for(const r of ls){const l=r.toLowerCase();if(l.startsWith("ja"))return"ja";if(l.startsWith("ko"))return"ko";if(l.startsWith("zh"))return(l.includes("tw")||l.includes("hk")||l.includes("hant"))?"zh-TW":"zh-CN";if(l.startsWith("en"))return"en";}return"en";}
+function setLanguage(lang){if(!translations[lang])lang="en";document.documentElement.lang=lang;document.querySelectorAll("[data-i18n]").forEach(e=>{let v=translations[lang][e.dataset.i18n];if(v!==undefined)e.textContent=v;});document.querySelectorAll(".lang-btn").forEach(b=>b.classList.toggle("active",b.dataset.lang===lang));try{localStorage.setItem("kitahamaGuideLang",lang)}catch(e){}}
+document.querySelectorAll(".lang-btn").forEach(b=>b.addEventListener("click",()=>setLanguage(b.dataset.lang)));
+let saved=null;try{saved=localStorage.getItem("kitahamaGuideLang")}catch(e){}setLanguage(saved||detectLanguage());
+
+
+function replayPanelAnimation(panel) {
+  if (!panel) return;
+
+  const title = panel.querySelector('.panel-title');
+  const cards = Array.from(panel.querySelectorAll('.card'));
+  const oneColumn = window.matchMedia('(max-width: 520px)').matches;
+
+  if (title) {
+    title.style.animation = 'none';
+    void title.offsetWidth;
+    title.style.animation = 'seqReveal .28s cubic-bezier(.22,.61,.36,1) .02s both';
+  }
+
+  cards.forEach(function(card, index) {
+    card.style.animation = 'none';
+    void card.offsetWidth;
+
+    /* Desktop: two cards in the same visual row share one delay.
+       Mobile: each card is its own row. */
+    const row = oneColumn ? index : Math.floor(index / 2);
+    const delay = 0.08 + row * (oneColumn ? 0.055 : 0.075);
+
+    card.style.animation =
+      'seqReveal .28s cubic-bezier(.22,.61,.36,1) ' + delay + 's both';
+  });
+}
+
+function showPanel(name, button) {
+  document.querySelectorAll('.panel').forEach(function(panel) {
+    panel.classList.toggle('active', panel.id === name + '-panel');
+  });
+  document.querySelectorAll('.tab').forEach(function(tab) {
+    tab.classList.remove('active');
+    tab.setAttribute('aria-selected','false');
+  });
+  button.classList.add('active');
+  button.setAttribute('aria-selected','true');
+
+  replayPanelAnimation(document.getElementById(name + '-panel'));
+}
+</script>
+</body>
+</html>
